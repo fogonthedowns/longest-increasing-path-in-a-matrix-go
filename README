@@ -1,0 +1,46 @@
+Given an integer matrix, find the length of the longest increasing path.
+
+From each cell, you can either move to four directions: left, right, up or down. You may NOT move diagonally or move outside of the boundary (i.e. wrap-around is not allowed).
+
+Example 1:
+
+Input: nums = 
+[
+  [9,9,4],
+  [6,6,8],
+  [2,1,1]
+] 
+Output: 4 
+Explanation: The longest increasing path is [1, 2, 6, 9].
+
+
+Solution: (DFS + Memoization)
+
+1. Loop over full x,y of 2d Matrix. answer = max(answer, dfs())
+2. return ans
+
+DFS Procedure
+* return Val if cache has entry for x,y
+* loop over cardinal directions: {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
+   * init at zero
+   * add 1 to x, y
+* inside above loop: 
+  * if guard: 0 <= x && x < len(matrix) && 0 <= y && y < len(matrix[0])
+  * if condition: matrix[x][y] > matrix[i][j]   
+    * recursively call max(cache, dfs)
+* matrix[i][j] = matrix[i][j] + 1 
+* return matrix[i][j]
+
+
+More generally:
+
+1. Check Cache
+2. if Condition is met recursively call dfs()
+3. return cache + 1
+
+https://en.wikipedia.org/wiki/Depth-first_search
+
+Time complexity: O(m^2 n^2)
+Space complexity O(nm)
+
+
